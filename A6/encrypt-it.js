@@ -18,21 +18,21 @@
     // Note: In this function, we usually want to set up our event handlers
     // for UI elements on the page.
 
-    let fontSizeOptions = querySelectorAll("input[name=text-size]");
+    let fontSizeOptions = document.querySelectorAll("input[name=text-size]");
 
     //BUTTON "Encrypt It"
     // id("id_of_button").addEventListener("click", function_name_to_generate);
-    id("encrypt-it").addEventListener("click", cipherGeneration);
+    document.getElementById("encrypt-it").addEventListener("click", cipherGeneration);
 
     //Button RESET
-    id("reset").addEventListener("click", function () { //Note: function() is anonymous function
-      id("result").innerText = "";
+    document.getElementById("reset").addEventListener("click", function () { //Note: function() is anonymous function
+      document.getElementById("result").innerText = "";
     });
 
 
     for (let i = 0; i < fontSizeOptions.length; i++) {
       fontSizeOptions[i].addEventListener("change", function () {
-        id("result").style.fontSize = this.value;
+        document.getElementById("result").style.fontSize = this.value;
       });
     }
   }
@@ -42,10 +42,10 @@
   // you shouldn't write an entire Java program in the main method).
 
   function cipherGeneration() {
-    if (id("cipher-type").value == "shift") {
-      id("result").innerText = shiftCipher(id("input-text").value.toLowerCase());
+    if (document.getElementById("cipher-type").value == "shift") {
+      document.getElementById("result").innerText = shiftCipher(id("input-text").value.toLowerCase());
     } else {
-      id("result").innerText = randomized(id("input-text").value.toLowerCase());
+      document.getElementById("result").innerText = randomized(id("input-text").value.toLowerCase());
     }
   }
 
@@ -73,7 +73,7 @@
     }
 
     //Capitalized
-    if (id("all-caps").checked) {
+    if (document.getElementById("all-caps").checked) {
       result = result.toUpperCase();
     }
 
@@ -103,7 +103,7 @@
     result = result.replace(",", "");
 
     //Capitalized
-    if (id("all-caps").checked) {
+    if (document.getElementById("all-caps").checked) {
       result = result.toUpperCase();
     }
 
@@ -113,13 +113,5 @@
   function isLowerCaseLetter(characters) {
     return characters >= 'a' && characters <= 'z';
   }
-
-  function id(idName) {
-    return document.getElementById(idName);
-  }
-
-  function querySelectorAll(selector) {
-    return document.querySelectorAll(selector);
-  }
-
+  
 })();
