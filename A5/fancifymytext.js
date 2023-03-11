@@ -1,3 +1,9 @@
+/*
+
+PHUNG PHAN
+CSC 196W - SPRING 23
+
+*/
 
 //Making font bigger 24pt
 function makeBigger() {
@@ -23,9 +29,9 @@ function makeBoring() {
 
 //Making font into uppercase and then add -Moo as suffix
 function makeMoo() {
-    var suffix = '-Moo'
+    var suffix = "-Moo"
     
-    str = document.getElementById('id');
+    str = document.getElementById("id");
     str.style.textTransform = "uppercase";
-    str.value = str.value.split('.').join('') + suffix;
+    str.value = str.value.split(".").join("") + suffix;
 }
