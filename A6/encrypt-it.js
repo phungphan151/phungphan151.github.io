@@ -73,9 +73,9 @@
     }
 
     //Capitalized
-    if (document.getElementById("all-caps").checked) 
+    if (document.getElementById("all-caps").checked) {
       result = result.toUpperCase();
-    
+    }
 
     return result;
   }
@@ -83,31 +83,28 @@
   function randomized(text) {
     let alphabet = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z".split(",");
     let cipher = [];
-    let randomIndex = 0;
-    let result = "";
-  
-    for (let i = 0; i < alphabet.length; i++) {
-      randomIndex = Math.floor(Math.random() * alphabet.length);
+
+    let alphabetLength = alphabet.length;
+    for (let i = 0; i < alphabetLength; i++) {
+      let randomIndex = Math.floor(Math.random() * alphabet.length);
+       
       cipher.push(alphabet.splice([Math.floor(Math.random() * alphabet.length)], 1));
     }
-    
+    let result = "";
     for (let i = 0; i < text.length; i++) {
       if (isLowerCaseLetter(text[i])) {
         let letterCode = text.charCodeAt(i) - 'a'.charCodeAt(0);
-
         result += cipher[letterCode];
-      } else 
+      } else {
         result += text[i];
-      
+      }
     }
-
     result = result.replace(",", "");
 
     //Capitalized
-    if (document.getElementById("all-caps").checked) 
+    if (document.getElementById("all-caps").checked) {
       result = result.toUpperCase();
-    
-
+    }
     return result;
   }
 
