@@ -43,9 +43,9 @@
 
   function cipherGeneration() {
     if (document.getElementById("cipher-type").value == "shift") {
-      document.getElementById("result").innerText = shiftCipher(id("input-text").value.toLowerCase());
+      document.getElementById("result").innerText = shiftCipher(document.getElementById("input-text").value.toLowerCase());
     } else {
-      document.getElementById("result").innerText = randomized(id("input-text").value.toLowerCase());
+      document.getElementById("result").innerText = randomized(document.getElementById("input-text").value.toLowerCase());
     }
   }
 
@@ -73,9 +73,9 @@
     }
 
     //Capitalized
-    if (document.getElementById("all-caps").checked) {
+    if (document.getElementById("all-caps").checked) 
       result = result.toUpperCase();
-    }
+    
 
     return result;
   }
@@ -83,29 +83,30 @@
   function randomized(text) {
     let alphabet = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z".split(",");
     let cipher = [];
+    let randomIndex = 0;
     let result = "";
-    let letterCode;
-
+  
     for (let i = 0; i < alphabet.length; i++) {
-      let randomIndex = Math.floor(Math.random() * alphabet.length);
+      randomIndex = Math.floor(Math.random() * alphabet.length);
       cipher.push(alphabet.splice([Math.floor(Math.random() * alphabet.length)], 1));
     }
-
+    
     for (let i = 0; i < text.length; i++) {
       if (isLowerCaseLetter(text[i])) {
-        letterCode = text.charCodeAt(i) - 'a'.charCodeAt(0);
+        let letterCode = text.charCodeAt(i) - 'a'.charCodeAt(0);
+
         result += cipher[letterCode];
-      } else {
+      } else 
         result += text[i];
-      }
+      
     }
 
     result = result.replace(",", "");
 
     //Capitalized
-    if (document.getElementById("all-caps").checked) {
+    if (document.getElementById("all-caps").checked) 
       result = result.toUpperCase();
-    }
+    
 
     return result;
   }
@@ -113,5 +114,5 @@
   function isLowerCaseLetter(characters) {
     return characters >= 'a' && characters <= 'z';
   }
-  
+
 })();
