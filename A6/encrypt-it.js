@@ -1,7 +1,7 @@
 /*
  * Starter file 
  */
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -17,10 +17,93 @@
   function init() {
     // Note: In this function, we usually want to set up our event handlers
     // for UI elements on the page.
+
+    //BUTTON "Encrypt It"
+    // id("id_of_button").addEventListener("click", function_name_to_generate);
+    id("encrypt-it").addEventListener("click", cipherGeneration);
+
+    //Button RESET
+    id("reset").addEventListener("click", function () { //Note: function() is anonymous function
+      id("result").innerText = "";
+    });
   }
 
   // Add any other functions in this area (you should not implement your
   // entire program in the init function, for similar reasons that
   // you shouldn't write an entire Java program in the main method).
+
+  function cipherGeneration() {
+    if (id("cipher-type").value == "shift") {
+      id("result").innerText = shiftCipher(id("input-text").value.toLowerCase());
+    } else {
+      id("result").innerText = randomized(id("input-text").value.toLowerCase());
+    }
+  }
+
+  /**
+   * Returns an encrypted version of the given text, where
+   * each letter is shifted alphabetically ahead by 1 letter,
+   * and 'z' is shifted to 'a' (creating an alphabetical cycle).
+   */
+
+  function shiftCipher(text) {
+    text = text.toLowerCase();
+    let result = "";
+    for (let i = 0; i < text.length; i++) {
+      if (!isLowerCaseLetter(text[i])) {
+        result += text[i];
+      } else if (text[i] < 'a' || text[i] > 'z') {
+        result += text[i];
+      } else if (text[i] == 'z') {
+        result += 'a';
+      } else { // letter is between 'a' and 'y'
+        let letter = text.charCodeAt(i);
+        let resultLetter = String.fromCharCode(letter + 1);
+        result += resultLetter;
+      }
+    }
+    
+    //Capitalized
+    if (id("all-caps").checked) {
+      result = result.toUpperCase();
+    }
+
+    return result;
+  }
+
+  function randomized(text) {
+    let alphabet = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z".split(",");
+    let cipher = [];
+    let result = "";
+    let letterCode;
+
+    for(let i = 0; i < alphabet.length; i++){
+      let randomIndex = Math.floor(Math.random() * alphabet.length);
+      cipher.push(alphabet.splice([Math.floor(Math.random() * alphabet.length)], 1));
+    }
+
+    for (let i = 0; i < text.length; i++){
+      if(isLowerCaseLetter(text[i])){
+        letterCode = text.charCodeAt(i) - 'a'.charCodeAt(0);
+        result += cipher[letterCode];
+      } else {
+        result += text[i];
+      }
+    }
+
+    result = result.replace(",", "");
+
+    //Capitalized
+    if (id("all-caps").checked) {
+      result = result.toUpperCase();
+    }
+
+    return result;
+  }
+
+  function isLowerCaseLetter(characters) {
+    return characters >= 'a' && characters <= 'z';
+  }
+
 
 })();
