@@ -18,6 +18,8 @@
     // Note: In this function, we usually want to set up our event handlers
     // for UI elements on the page.
 
+    let fontSizeOptions = querySelectorAll("input[name=text-size]");
+
     //BUTTON "Encrypt It"
     // id("id_of_button").addEventListener("click", function_name_to_generate);
     id("encrypt-it").addEventListener("click", cipherGeneration);
@@ -26,6 +28,13 @@
     id("reset").addEventListener("click", function () { //Note: function() is anonymous function
       id("result").innerText = "";
     });
+
+
+    for (let i = 0; i < fontSizeOptions.length; i++) {
+      fontSizeOptions[i].addEventListener("change", function () {
+        id("result").style.fontSize = this.value;
+      });
+    }
   }
 
   // Add any other functions in this area (you should not implement your
@@ -62,7 +71,7 @@
         result += resultLetter;
       }
     }
-    
+
     //Capitalized
     if (id("all-caps").checked) {
       result = result.toUpperCase();
@@ -77,13 +86,13 @@
     let result = "";
     let letterCode;
 
-    for(let i = 0; i < alphabet.length; i++){
+    for (let i = 0; i < alphabet.length; i++) {
       let randomIndex = Math.floor(Math.random() * alphabet.length);
       cipher.push(alphabet.splice([Math.floor(Math.random() * alphabet.length)], 1));
     }
 
-    for (let i = 0; i < text.length; i++){
-      if(isLowerCaseLetter(text[i])){
+    for (let i = 0; i < text.length; i++) {
+      if (isLowerCaseLetter(text[i])) {
         letterCode = text.charCodeAt(i) - 'a'.charCodeAt(0);
         result += cipher[letterCode];
       } else {
@@ -105,5 +114,12 @@
     return characters >= 'a' && characters <= 'z';
   }
 
+  function id(idName) {
+    return document.getElementById(idName);
+  }
+
+  function querySelectorAll(selector) {
+    return document.querySelectorAll(selector);
+  }
 
 })();
